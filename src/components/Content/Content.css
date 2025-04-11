@@ -5,26 +5,27 @@
   align-items: center;
   text-align: center;
   margin-top: 97px;
-  padding: 20px;
+  padding: 20px 0px;
   background-color: #F7F7F7;
 }
 
 .content-container h2 {
   font-family: 'Effra Trial', sans-serif;
   font-weight: 600;
-  font-size: 3.5rem;
+  font-size: 4.3rem;
   color: #0F2837;
   max-width: 1150px;
   margin: 0 auto;
   line-height: 1.2;
+  margin-top: 20px;
 }
 
 .content-container p {
   font-family: 'Effra Trial', sans-serif;
-  font-weight: 400;
-  font-size: 1.2rem;
+  font-weight: 500;
+  font-size: 1.3rem;
   color: #EB5A3C;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 /* Tablet styles */
@@ -40,10 +41,6 @@
 
 /* Mobile styles */
 @media (max-width: 768px) {
-  .content-container {
-    padding: 15px;
-  }
-  
   .content-container h2 {
     font-size: 2rem;
     line-height: 1.3;

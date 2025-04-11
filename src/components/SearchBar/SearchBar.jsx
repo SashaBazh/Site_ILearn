@@ -4,6 +4,7 @@ import "./SearchBar.css";
 const SearchBar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Category");
+  const [isOpen, setIsOpen] = useState(false);
 
   const categories = [
     "Category",
@@ -14,13 +15,27 @@ const SearchBar = () => {
     "Data Science"
   ];
 
+  const handleSelectChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  const handleSelectClick = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleSelectBlur = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="search-container">
       <div className="search-bar">
         <div className="category-dropdown">
           <select
             value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            onChange={handleSelectChange}
+            onClick={handleSelectClick}
+            onBlur={handleSelectBlur}
           >
             {categories.map((category) => (
               <option key={category} value={category}>
@@ -28,8 +43,8 @@ const SearchBar = () => {
               </option>
             ))}
           </select>
-          <div className="dropdown-arrow">
-            <img src="./assets/icons/dropdown-arrow.svg"/>
+          <div className={`dropdown-arrow ${isOpen ? "rotated" : ""}`}>
+            <img src="./assets/icons/dropdown-arrow.svg" alt="arrow" />
           </div>
         </div>
         <div className="search-input">

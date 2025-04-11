@@ -1,0 +1,130 @@
+.card {
+    width: 250px;
+    height: 320px;
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease, margin 0.3s ease;
+    margin: 0 7px;
+    z-index: 1;
+    transform-origin: center center;
+}
+
+.card:hover {
+    width: 300px;  /* Увеличиваем ширину */
+    height: 400px; /* Увеличиваем высоту */
+    z-index: 100;
+}
+
+.card-inner {
+    position: relative;
+    height: 100%;
+}
+
+.card-image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+.favorite-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    padding: 0;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    padding: 35px 24px;
+    text-align: left;
+    transition: opacity 0.3s ease; /* Плавное появление кнопки */
+}
+
+.card-title {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-family: 'Effra Trial', sans-serif;
+    font-weight: 500;
+    max-width: 175px;
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    position: relative;
+}
+
+.tag {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: white;
+    border: 1px solid white;
+    font-size: 13px;
+    font-family: 'Effra Trial', sans-serif;
+    font-weight: 400;
+}
+
+.info-button {
+    display: none; /* Кнопка по-прежнему скрыта по умолчанию */
+    margin-top: 35px;
+    margin-bottom: -10px;
+    padding: 0px 16px;
+    background-color: #0F2837;
+    border-radius: 100px;
+    height: 45px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Effra Trial', sans-serif;
+    font-weight: 500;
+    width: 245px;
+    text-align: left;
+    display: inline-flex; /* Для выравнивания текста и стрелочки */
+    align-items: center;  /* Центрируем элементы по вертикали */
+    justify-content: space-between; /* Раздвигаем текст и стрелочку по краям */
+}
+
+/* Скрываем кнопку по умолчанию */
+.card-content .info-button {
+    display: none;
+}
+
+/* Показываем кнопку при наведении на карточку */
+.card:hover .info-button {
+    display: inline-flex; /* Показываем кнопку при наведении */
+}
+
+/* Стрелка и движение при наведении */
+.info-button svg {
+    width: 16px;
+    height: 16px;
+    fill: white;
+    transition: transform 0.3s ease; /* Плавное движение стрелочки */
+}
+
+.info-button:hover svg {
+    transform: translateX(5px); /* Эффект сдвига стрелочки при наведении */
+}

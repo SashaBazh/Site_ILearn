@@ -1,0 +1,48 @@
+.cards-container {
+    position: relative;
+    width: 100%;
+    padding: 65px 0;
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+
+.cards-wrapper {
+    display: flex;
+    padding: 0 130px;
+    height: 400px; /* Высота блока с карточками */
+    align-items: center;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.cards-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.cards-fade-left,
+.cards-fade-right {
+    position: absolute; /* Позиционируем фейд-эффекты относительно контейнера */
+    top: 0;
+    height: 100%; /* Высота фейд-эффекта совпадает с высотой контейнера карточек */
+    z-index: 100;
+    pointer-events: none;
+}
+
+.cards-fade-left {
+    left: 0;
+    width: 30vw; /* Ширина фейд-эффекта с левой стороны */
+    background: linear-gradient(to right, rgba(245, 245, 245, 1) 0%, rgba(245, 245, 245, 0) 100%);
+}
+
+.cards-fade-right {
+    right: 0;
+    width: 30vw; /* Ширина фейд-эффекта с правой стороны */
+    background: linear-gradient(to left, rgba(245, 245, 245, 1) 0%, rgba(245, 245, 245, 0) 100%);
+}
+
+@media (max-width: 500px) {
+    .cards-container {
+        padding: 15px 0;
+    }
+}
