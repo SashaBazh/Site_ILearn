@@ -17,6 +17,25 @@
     z-index: 100;
 }
 
+.card::before {
+    border-radius: 12px; /* Должен соответствовать радиусу карточки */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #B51F33;
+    opacity: 0; /* Начальное состояние - полностью прозрачный */
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    border-radius: 30px;
+}
+
+.card:hover::before {
+    opacity: 0.63; /* 63% непрозрачности при наведении */
+}
+
 .card-inner {
     position: relative;
     height: 100%;
@@ -58,6 +77,7 @@
     padding: 35px 24px;
     text-align: left;
     transition: opacity 0.3s ease; /* Плавное появление кнопки */
+    z-index: 2;
 }
 
 .card-title {

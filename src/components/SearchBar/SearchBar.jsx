@@ -1,45 +1,90 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./SearchBar.css";
+import { fetchCourses } from "../../api/courses";
+import { fetchCategories } from "../../api/categories";
 
-const SearchBar = () => {
+const SearchBar = ({ onSearchResults }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("Category");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [categories, setCategories] = useState([{ id: "all", name: "Category" }]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const timerRef = useRef();
+  const lastSearchRef = useRef({ query: "", category: "all" });
 
-  const categories = [
-    "Category",
-    "Programming",
-    "Design",
-    "Business",
-    "Marketing",
-    "Data Science"
-  ];
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const fetchedCategories = await fetchCategories();
+        setCategories([
+          { id: "all", name: "Category" },
+          ...fetchedCategories.map(cat => ({ id: cat.id, name: cat.name }))
+        ]);
+      } catch (err) {
+        console.error("Error loading categories:", err);
+        setError("Failed to load categories");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const handleSelectChange = (e) => {
-    setSelectedCategory(e.target.value);
-  };
+    loadCategories();
+  }, []);
 
-  const handleSelectClick = () => {
-    setIsOpen(!isOpen);
-  };
+  useEffect(() => {
+    // Проверяем, действительно ли изменились параметры поиска
+    if (searchQuery === lastSearchRef.current.query && 
+        selectedCategory === lastSearchRef.current.category) {
+      return;
+    }
 
-  const handleSelectBlur = () => {
-    setIsOpen(false);
-  };
+    // Обновляем реф последнего поиска
+    lastSearchRef.current = { query: searchQuery, category: selectedCategory };
+
+    // Очищаем предыдущий таймер
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    // Устанавливаем новый таймер
+    timerRef.current = setTimeout(async () => {
+      try {
+        const categoryId = selectedCategory !== "all" ? selectedCategory : null;
+        const results = await fetchCourses(categoryId, searchQuery);
+        
+        onSearchResults?.(results);
+      } catch (err) {
+        console.error("Error searching courses:", err);
+        setError("Search failed. Please try again.");
+      }
+    }, 500);
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [searchQuery, selectedCategory, onSearchResults]);
+
+  const handleSelectClick = () => setIsOpen(!isOpen);
+  const handleSelectBlur = () => setIsOpen(false);
+  const handleSubmit = (e) => e.preventDefault();
 
   return (
     <div className="search-container">
-      <div className="search-bar">
+      <form className="search-bar" onSubmit={handleSubmit}>
         <div className="category-dropdown">
           <select
             value={selectedCategory}
-            onChange={handleSelectChange}
+            onChange={(e) => setSelectedCategory(e.target.value)}
             onClick={handleSelectClick}
             onBlur={handleSelectBlur}
+            disabled={isLoading}
           >
             {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
+              <option key={category.id} value={category.id}>
+                {category.name}
               </option>
             ))}
           </select>
@@ -54,11 +99,12 @@ const SearchBar = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <button className="search-button">
+          <div className="search-button">
             <img src="./assets/icons/searchbar.svg" alt="" />
-          </button>
+          </div>
         </div>
-      </div>
+      </form>
+      {error && <div className="error-message">{error}</div>}
     </div>
   );
 };

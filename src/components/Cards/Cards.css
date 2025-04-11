@@ -32,17 +32,22 @@
 .cards-fade-left {
     left: 0;
     width: 30vw; /* Ширина фейд-эффекта с левой стороны */
-    background: linear-gradient(to right, rgba(245, 245, 245, 1) 0%, rgba(245, 245, 245, 0) 100%);
+    background: linear-gradient(to right, rgba(245, 245, 245, 1) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 .cards-fade-right {
     right: 0;
     width: 30vw; /* Ширина фейд-эффекта с правой стороны */
-    background: linear-gradient(to left, rgba(245, 245, 245, 1) 0%, rgba(245, 245, 245, 0) 100%);
+    background: linear-gradient(to left, rgba(245, 245, 245, 1) 0%, rgba(255, 255, 255, 0) 100%);
 }
 
 @media (max-width: 500px) {
     .cards-container {
         padding: 15px 0;
     }
+
+    .cards-fade-left,
+    .cards-fade-right {
+        width: 15vw;
+    }  
 }

@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
+import { login, register } from "../../api/auth"; // Import the auth services
 
 const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
   const [isMobile, setIsMobile] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Check if screen width is less than 800px
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 800);
       if (window.innerWidth >= 800) {
-        // Изменить здесь: используйте функцию из пропсов вместо setState
-        // setIsMobileMenuOpen(false);
         if (isMobileMenuOpen) {
           toggleMobileMenu();
         }
@@ -31,13 +35,11 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
     };
   }, [isMobileMenuOpen, toggleMobileMenu]);
 
-  // Toggle mobile menu
-
   // Toggle login modal
   const toggleLoginModal = () => {
     setShowLoginModal(!showLoginModal);
+    setErrorMessage(""); // Clear any error messages when opening/closing modal
     if (isMobileMenuOpen) {
-      // Используйте функцию из пропсов
       toggleMobileMenu();
     }
   };
@@ -45,6 +47,40 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
   // Switch between login and register modes
   const toggleAuthMode = () => {
     setIsLoginMode(!isLoginMode);
+    setErrorMessage(""); // Clear error messages when switching modes
+    // Clear form fields when switching modes
+    setEmail("");
+    setPassword("");
+    if (!isLoginMode) {
+      setName("");
+    }
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMessage("");
+
+    try {
+      if (isLoginMode) {
+        // Login functionality
+        await login(email, password);
+        // Close modal on successful login
+        toggleLoginModal();
+        // You could add additional logic here, like redirecting or updating UI
+      } else {
+        // Register functionality
+        await register(name, email, password);
+        // Switch to login mode after successful registration
+        setIsLoginMode(true);
+        setErrorMessage("Registration successful! Please log in.");
+      }
+    } catch (error) {
+      setErrorMessage(error.message || "Authentication failed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -134,12 +170,28 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
               </button>
             </div>
             <div className="modal-body">
-              <form>
+              {errorMessage && <div className="error-message">{errorMessage}</div>}
+              <form onSubmit={handleSubmit}>
+                {!isLoginMode && (
+                  <div className="form-group">
+                    <label htmlFor="name">Name</label>
+                    <input
+                      type="text"
+                      id="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      placeholder="Enter your name"
+                      required
+                    />
+                  </div>
+                )}
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
                   <input
                     type="email"
                     id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
                     required
                   />
@@ -149,12 +201,20 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
                   <input
                     type="password"
                     id="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Enter your password"
                     required
                   />
                 </div>
-                <button type="submit" className="submit-btn">
-                  {isLoginMode ? "Login" : "Register"}
+                <button 
+                  type="submit" 
+                  className="submit-btn" 
+                  disabled={isLoading}
+                >
+                  {isLoading 
+                    ? "Processing..." 
+                    : isLoginMode ? "Login" : "Register"}
                 </button>
               </form>
               <div className="auth-switch">
