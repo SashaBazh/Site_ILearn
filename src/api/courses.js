@@ -15,7 +15,7 @@ export const fetchCourses = async (
     params.append("offset", offset);
 
     const response = await fetchWithAuth(
-      `${BASE_URL}/courses/?${params.toString()}`
+      `${BASE_URL}/courses/all?${params.toString()}`
     );
 
     if (!response.ok) {
