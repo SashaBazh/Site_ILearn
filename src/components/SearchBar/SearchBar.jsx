@@ -95,7 +95,7 @@ const SearchBar = ({ onSearchResults }) => {
         <div className="search-input">
           <input
             type="text"
-            placeholder="Search for Programs..."
+            placeholder={window.innerWidth <= 600 ? "Search" : "Search for Programs..."}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
