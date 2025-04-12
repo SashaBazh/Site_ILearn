@@ -14,7 +14,6 @@ export const fetchCourses = async (
     params.append("limit", limit);
     params.append("offset", offset);
 
-    // Убрали лишний слеш перед ?
     const response = await fetchWithAuth(
       `${BASE_URL}/courses?${params.toString()}`
     );
@@ -26,6 +25,6 @@ export const fetchCourses = async (
     return await response.json();
   } catch (error) {
     console.error("Error fetching courses:", error);
-    throw error; // Пробрасываем ошибку выше для обработки в компоненте
+    throw error;
   }
 };

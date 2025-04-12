@@ -1,7 +1,7 @@
 import React from "react";
 import "./Card.css";
 
-const Card = ({ image, title, category, tags = [] }) => {
+const Card = ({ image, title, tags = [] }) => {
   return (
     <div className="card">
       <div className="card-inner">
@@ -14,7 +14,6 @@ const Card = ({ image, title, category, tags = [] }) => {
         <div className="card-content">
           <h3 className="card-title">{title}</h3>
           <div className="card-tags">
-            <span className="tag category-tag">{category}</span>
             {tags.map((tag, index) => (
               <span key={index} className="tag">
                 {tag}
@@ -23,7 +22,7 @@ const Card = ({ image, title, category, tags = [] }) => {
           </div>
           <button className="info-button">
             <span>More Details</span>
-           <img src="./assets/icons/arrow.svg"/>
+            <img src="./assets/icons/arrow.svg" />
           </button>
         </div>
       </div>

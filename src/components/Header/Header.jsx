@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Header.css";
-import { login, register } from "../../api/auth"; // Import the auth services
+import { login, register } from "../../api/auth";
 
 const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
   const [isMobile, setIsMobile] = useState(false);
@@ -12,7 +12,6 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // Check if screen width is less than 800px
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 800);
@@ -23,32 +22,26 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
       }
     };
 
-    // Initial check
     handleResize();
 
-    // Add event listener
     window.addEventListener("resize", handleResize);
 
-    // Clean up
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, [isMobileMenuOpen, toggleMobileMenu]);
 
-  // Toggle login modal
   const toggleLoginModal = () => {
     setShowLoginModal(!showLoginModal);
-    setErrorMessage(""); // Clear any error messages when opening/closing modal
+    setErrorMessage("");
     if (isMobileMenuOpen) {
       toggleMobileMenu();
     }
   };
 
-  // Switch between login and register modes
   const toggleAuthMode = () => {
     setIsLoginMode(!isLoginMode);
-    setErrorMessage(""); // Clear error messages when switching modes
-    // Clear form fields when switching modes
+    setErrorMessage("");
     setEmail("");
     setPassword("");
     if (!isLoginMode) {
@@ -56,7 +49,6 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
     }
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -64,20 +56,17 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
 
     try {
       if (isLoginMode) {
-        // Login functionality
         await login(email, password);
-        // Close modal on successful login
         toggleLoginModal();
-        // You could add additional logic here, like redirecting or updating UI
       } else {
-        // Register functionality
         await register(name, email, password);
-        // Switch to login mode after successful registration
         setIsLoginMode(true);
         setErrorMessage("Registration successful! Please log in.");
       }
     } catch (error) {
-      setErrorMessage(error.message || "Authentication failed. Please try again.");
+      setErrorMessage(
+        error.message || "Authentication failed. Please try again."
+      );
     } finally {
       setIsLoading(false);
     }
@@ -92,7 +81,6 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
           </div>
         </div>
 
-        {/* Mobile menu toggle */}
         {isMobile && (
           <div className="burger-menu-icon" onClick={toggleMobileMenu}>
             <img
@@ -103,7 +91,6 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
           </div>
         )}
 
-        {/* Mobile menu */}
         {isMobileMenuOpen && isMobile && (
           <div className="mobile-menu-overlay"></div>
         )}
@@ -159,7 +146,6 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
         </div>
       </header>
 
-      {/* Login/Register Modal */}
       {showLoginModal && (
         <div className="modal-overlay" onClick={toggleLoginModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
@@ -170,7 +156,9 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
               </button>
             </div>
             <div className="modal-body">
-              {errorMessage && <div className="error-message">{errorMessage}</div>}
+              {errorMessage && (
+                <div className="error-message">{errorMessage}</div>
+              )}
               <form onSubmit={handleSubmit}>
                 {!isLoginMode && (
                   <div className="form-group">
@@ -207,14 +195,16 @@ const Header = ({ isMobileMenuOpen, toggleMobileMenu }) => {
                     required
                   />
                 </div>
-                <button 
-                  type="submit" 
-                  className="submit-btn" 
+                <button
+                  type="submit"
+                  className="submit-btn"
                   disabled={isLoading}
                 >
-                  {isLoading 
-                    ? "Processing..." 
-                    : isLoginMode ? "Login" : "Register"}
+                  {isLoading
+                    ? "Processing..."
+                    : isLoginMode
+                    ? "Login"
+                    : "Register"}
                 </button>
               </form>
               <div className="auth-switch">

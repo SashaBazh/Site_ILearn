@@ -1,11 +1,8 @@
-// authService.js
 import { BASE_URL } from "./config";
 
-// Constants for localStorage keys
 const ACCESS_TOKEN_KEY = "access_token";
 const REFRESH_TOKEN_KEY = "refresh_token";
 
-// Function to login user and get tokens
 export const login = async (email, password) => {
   try {
     const response = await fetch(`${BASE_URL}/auth/`, {
@@ -32,7 +29,6 @@ export const login = async (email, password) => {
   }
 };
 
-// Function to register a new user
 export const register = async (name, email, password) => {
   try {
     const response = await fetch(`${BASE_URL}/auth/register`, {
@@ -53,17 +49,14 @@ export const register = async (name, email, password) => {
   }
 };
 
-// Helper functions to get tokens
 export const getAccessToken = () => localStorage.getItem(ACCESS_TOKEN_KEY);
 export const getRefreshToken = () => localStorage.getItem(REFRESH_TOKEN_KEY);
 
-// Function to logout (clear tokens)
 export const logout = () => {
   localStorage.removeItem(ACCESS_TOKEN_KEY);
   localStorage.removeItem(REFRESH_TOKEN_KEY);
 };
 
-// Authenticated fetch function
 export const fetchWithAuth = async (url, options = {}) => {
   const token = getAccessToken();
   if (!token) {
@@ -82,7 +75,6 @@ export const fetchWithAuth = async (url, options = {}) => {
 
   if (response.status === 401) {
     console.warn("Токен истек, требуется обновление.");
-    // Here you could add token refresh logic
   }
 
   return response;

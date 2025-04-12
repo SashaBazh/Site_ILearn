@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./Content.css";
-import SearchBar from '../SearchBar/SearchBar';
-import Cards from '../Cards/Cards';
-import { fetchCourses } from '../../api/courses';
+import SearchBar from "../SearchBar/SearchBar";
+import Cards from "../Cards/Cards";
+import { fetchCourses } from "../../api/courses";
 
 const Content = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Добавляем начальную загрузку курсов
   useEffect(() => {
     loadInitialCourses();
   }, []);
@@ -33,12 +32,14 @@ const Content = () => {
 
   return (
     <div className="content-container">
-      <h2>Build your library for <br /> your career and personal growth</h2>
+      <h2>
+        Build your library for <br /> your career and personal growth
+      </h2>
       <p>Find courses on almost any topic</p>
-      
+
       {error && <div className="error-message">{error}</div>}
       {loading && <div className="loading-message">Loading courses...</div>}
-      
+
       <SearchBar onSearchResults={handleSearchResults} />
       <Cards courses={courses} />
     </div>

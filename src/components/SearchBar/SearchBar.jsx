@@ -6,7 +6,9 @@ import { fetchCategories } from "../../api/categories";
 const SearchBar = ({ onSearchResults }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [categories, setCategories] = useState([{ id: "all", name: "Category" }]);
+  const [categories, setCategories] = useState([
+    { id: "all", name: "Category" },
+  ]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +21,7 @@ const SearchBar = ({ onSearchResults }) => {
         const fetchedCategories = await fetchCategories();
         setCategories([
           { id: "all", name: "Category" },
-          ...fetchedCategories.map(cat => ({ id: cat.id, name: cat.name }))
+          ...fetchedCategories.map((cat) => ({ id: cat.id, name: cat.name })),
         ]);
       } catch (err) {
         console.error("Error loading categories:", err);
@@ -33,26 +35,24 @@ const SearchBar = ({ onSearchResults }) => {
   }, []);
 
   useEffect(() => {
-    // Проверяем, действительно ли изменились параметры поиска
-    if (searchQuery === lastSearchRef.current.query && 
-        selectedCategory === lastSearchRef.current.category) {
+    if (
+      searchQuery === lastSearchRef.current.query &&
+      selectedCategory === lastSearchRef.current.category
+    ) {
       return;
     }
 
-    // Обновляем реф последнего поиска
     lastSearchRef.current = { query: searchQuery, category: selectedCategory };
 
-    // Очищаем предыдущий таймер
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
 
-    // Устанавливаем новый таймер
     timerRef.current = setTimeout(async () => {
       try {
         const categoryId = selectedCategory !== "all" ? selectedCategory : null;
         const results = await fetchCourses(categoryId, searchQuery);
-        
+
         onSearchResults?.(results);
       } catch (err) {
         console.error("Error searching courses:", err);

@@ -12,13 +12,13 @@
 }
 
 .card:hover {
-    width: 300px;  /* Увеличиваем ширину */
-    height: 400px; /* Увеличиваем высоту */
+    width: 300px;
+    height: 400px;
     z-index: 100;
 }
 
 .card::before {
-    border-radius: 12px; /* Должен соответствовать радиусу карточки */
+    border-radius: 12px;
     content: '';
     position: absolute;
     top: 0;
@@ -26,14 +26,14 @@
     right: 0;
     bottom: 0;
     background-color: #B51F33;
-    opacity: 0; /* Начальное состояние - полностью прозрачный */
+    opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 1;
     border-radius: 30px;
 }
 
 .card:hover::before {
-    opacity: 0.63; /* 63% непрозрачности при наведении */
+    opacity: 0.63;
 }
 
 .card-inner {
@@ -76,7 +76,7 @@
     color: white;
     padding: 35px 24px;
     text-align: left;
-    transition: opacity 0.3s ease; /* Плавное появление кнопки */
+    transition: opacity 0.3s ease;
     z-index: 2;
 }
 
@@ -107,7 +107,7 @@
 }
 
 .info-button {
-    display: none; /* Кнопка по-прежнему скрыта по умолчанию */
+    display: none;
     margin-top: 35px;
     margin-bottom: -10px;
     padding: 0px 16px;
@@ -122,29 +122,26 @@
     font-weight: 500;
     width: 245px;
     text-align: left;
-    display: inline-flex; /* Для выравнивания текста и стрелочки */
-    align-items: center;  /* Центрируем элементы по вертикали */
-    justify-content: space-between; /* Раздвигаем текст и стрелочку по краям */
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-/* Скрываем кнопку по умолчанию */
 .card-content .info-button {
     display: none;
 }
 
-/* Показываем кнопку при наведении на карточку */
 .card:hover .info-button {
-    display: inline-flex; /* Показываем кнопку при наведении */
+    display: inline-flex;
 }
 
-/* Стрелка и движение при наведении */
 .info-button svg {
     width: 16px;
     height: 16px;
     fill: white;
-    transition: transform 0.3s ease; /* Плавное движение стрелочки */
+    transition: transform 0.3s ease;
 }
 
 .info-button:hover svg {
-    transform: translateX(5px); /* Эффект сдвига стрелочки при наведении */
+    transform: translateX(5px);
 }
