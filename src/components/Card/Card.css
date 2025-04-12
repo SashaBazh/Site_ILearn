@@ -1,0 +1,147 @@
+.card {
+    width: 250px;
+    height: 320px;
+    flex-shrink: 0;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease, margin 0.3s ease;
+    margin: 0 7px;
+    z-index: 1;
+    transform-origin: center center;
+}
+
+.card:hover {
+    width: 300px;
+    height: 400px;
+    z-index: 100;
+}
+
+.card::before {
+    border-radius: 12px;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #B51F33;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+    border-radius: 30px;
+}
+
+.card:hover::before {
+    opacity: 0.63;
+}
+
+.card-inner {
+    position: relative;
+    height: 100%;
+}
+
+.card-image-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 30px;
+}
+
+.favorite-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+    padding: 0;
+}
+
+.card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    padding: 35px 24px;
+    text-align: left;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+}
+
+.card-title {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-family: 'Effra Trial', sans-serif;
+    font-weight: 500;
+    max-width: 175px;
+}
+
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    position: relative;
+}
+
+.tag {
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    color: white;
+    border: 1px solid white;
+    font-size: 13px;
+    font-family: 'Effra Trial', sans-serif;
+    font-weight: 400;
+}
+
+.info-button {
+    display: none;
+    margin-top: 35px;
+    margin-bottom: -10px;
+    padding: 0px 16px;
+    background-color: #0F2837;
+    border-radius: 100px;
+    height: 45px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: 'Effra Trial', sans-serif;
+    font-weight: 500;
+    width: 245px;
+    text-align: left;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-content .info-button {
+    display: none;
+}
+
+.card:hover .info-button {
+    display: inline-flex;
+}
+
+.info-button svg {
+    width: 16px;
+    height: 16px;
+    fill: white;
+    transition: transform 0.3s ease;
+}
+
+.info-button:hover svg {
+    transform: translateX(5px);
+}

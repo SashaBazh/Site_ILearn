@@ -1,0 +1,259 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 5%;
+  background-color: rgba(255, 255, 255, 0.8);
+  font-family: 'Montserrat', sans-serif;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 90%;
+  z-index: 1000;
+  backdrop-filter: blur(20px);
+  transition: all 0.3s ease;
+}
+
+.logo-img {
+  height: 70px;
+}
+
+.logo-img img {
+  max-height: 100%;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.nav-links li {
+  margin: 0 10px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #333;
+  font-size: 16px;
+  font-family: 'Effra Trial', sans-serif;
+  font-weight: 600;
+}
+
+.vertical-bar {
+  width: 1px;
+  height: 35px;
+  background-color: #0f2837;
+}
+
+.search-btn,
+.login-btn,
+.menu-toggle,
+.burger-menu-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.burger-menu-icon {
+  display: none;
+  z-index: 10;
+}
+
+.close-btn {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #333;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  font-family: 'Effra Trial', sans-serif;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #0f2837;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #777;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #0f2837;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #1a3c53;
+}
+
+.auth-switch {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.auth-switch p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.switch-btn {
+  background: none;
+  border: none;
+  color: #0f2837;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0 5px;
+  font-size: 14px;
+}
+
+.switch-btn:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 799px) {
+  .burger-menu-icon {
+    display: block;
+  }
+
+  .nav-menu:not(.mobile-open) {
+    display: none;
+  }
+
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+    z-index: 998;
+  }
+
+  .nav-menu.mobile-open {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    z-index: 999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-menu.mobile-open .close-btn {
+    display: block;
+  }
+
+  .nav-menu.mobile-open .nav-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-menu.mobile-open .nav-links li {
+    margin: 15px 0;
+  }
+
+  .nav-menu.mobile-open .vertical-bar {
+    width: 100%;
+    height: 1px;
+    margin: 10px 0;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+}

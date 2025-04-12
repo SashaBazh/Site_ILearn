@@ -1,0 +1,53 @@
+.cards-container {
+    position: relative;
+    width: 100%;
+    padding: 65px 0;
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+
+.cards-wrapper {
+    display: flex;
+    padding: 0 130px;
+    height: 400px;
+    align-items: center;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.cards-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.cards-fade-left,
+.cards-fade-right {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.cards-fade-left {
+    left: 0;
+    width: 30vw;
+    background: linear-gradient(to right, rgba(245, 245, 245, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.cards-fade-right {
+    right: 0;
+    width: 30vw;
+    background: linear-gradient(to left, rgba(245, 245, 245, 1) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+@media (max-width: 500px) {
+    .cards-container {
+        padding: 15px 0;
+    }
+
+    .cards-fade-left,
+    .cards-fade-right {
+        width: 15vw;
+    }
+}

@@ -1,0 +1,147 @@
+.search-container {
+  width: 100%;
+  height: 100%;
+  max-width: 656px;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+}
+
+.search-bar {
+  display: flex;
+  border: 1px solid #0F2837;
+  border-radius: 30px;
+  overflow: hidden;
+  background: white;
+  width: 100%;
+  height: 60px;
+}
+
+.category-dropdown {
+  position: relative;
+  min-width: 235px;
+  height: 60px;
+  border-right: 1px solid rgba(15, 40, 55, 0.19);
+}
+
+.category-dropdown select {
+  width: 100%;
+  height: 60px;
+  padding: 12px 35px 12px 15px;
+  border: none;
+  background: transparent;
+  appearance: none;
+  font-family: 'Effra Trial', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: #0F2837;
+  cursor: pointer;
+}
+
+.category-dropdown select:focus {
+  outline: none;
+  border: none;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(15, 40, 55, 0.15);
+}
+
+
+.dropdown-arrow {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+.dropdown-arrow.rotated {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.search-input {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+.search-input input {
+  flex-grow: 1;
+  padding: 12px 0;
+  border: none;
+  outline: none;
+  font-family: 'Effra Trial', sans-serif;
+  font-size: 16px;
+  color: #6F7E87;
+  font-weight: 600;
+}
+
+.search-input input::placeholder {
+  font-family: 'Effra Trial', sans-serif;
+  font-size: 16px;
+  color: #6F7E87;
+  font-weight: 600;
+}
+
+.search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+@media screen and (max-width: 1024px) {
+  .search-container {
+    margin-top: 15px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search-container {
+    margin: 10px 10px;
+    padding: 0px;
+  }
+
+  .search-container {
+    max-width: 556px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .category-dropdown {
+    min-width: 140px;
+  }
+
+  .search-container {
+    max-width: 456px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .category-dropdown {
+    min-width: 130px;
+  }
+
+  .search-container {
+    max-width: 400px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .category-dropdown {
+    min-width: 120px;
+  }
+
+  .search-button {
+    margin-left: -20px;
+  }
+
+  .search-container {
+    max-width: 350px;
+  }
+}
