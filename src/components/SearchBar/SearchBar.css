@@ -122,19 +122,9 @@
   }
 }
 
-@media screen and (max-width: 600px) {
-  .search-input input::placeholder {
-    font-size: 14px;
-  }
-}
-
 @media screen and (max-width: 500px) {
   .category-dropdown {
     min-width: 130px;
-  }
-
-  .search-button {
-    margin-left: -20px;
   }
 
   .search-container {
@@ -148,6 +138,6 @@
   }
 
   .search-container {
-    max-width: 350px;
+    max-width: 380px;
   }
 }
