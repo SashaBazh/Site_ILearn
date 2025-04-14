@@ -67,8 +67,8 @@
   flex-grow: 1;
   display: flex;
   align-items: center;
-  position: relative;
   padding: 0 15px;
+  gap: 10px; /* Добавим отступ между input и кнопкой */
 }
 
 .search-input input {
@@ -80,19 +80,22 @@
   font-size: 16px;
   color: #6F7E87;
   font-weight: 600;
-  padding-right: 40px;
+  /* удаляем padding-right, он теперь не нужен */
 }
 
 .search-button {
-  position: absolute;
-  right: 15px !important;        
-  top: 50%;           
-  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
+  /* убираем position: absolute */
 }
+
 
 
 .search-input input::placeholder {
