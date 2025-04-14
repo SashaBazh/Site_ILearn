@@ -128,7 +128,7 @@
   }
 
   .search-container {
-    max-width: 400px;
+    max-width: 420px;
   }
 }
 
@@ -139,5 +139,15 @@
 
   .search-container {
     max-width: 380px;
+  }
+
+  .search-input input {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .search-input input {
+    width: 90px;
   }
 }
