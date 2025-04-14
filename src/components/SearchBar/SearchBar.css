@@ -68,7 +68,6 @@
   display: flex;
   align-items: center;
   padding: 0 15px;
-  gap: 10px; /* Добавим отступ между input и кнопкой */
 }
 
 .search-input input {
@@ -80,29 +79,20 @@
   font-size: 16px;
   color: #6F7E87;
   font-weight: 600;
-  /* удаляем padding-right, он теперь не нужен */
 }
-
-.search-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  /* убираем position: absolute */
-}
-
-
 
 .search-input input::placeholder {
   font-family: 'Effra Trial', sans-serif;
   font-size: 16px;
   color: #6F7E87;
   font-weight: 600;
+}
+
+.search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 5px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -143,24 +133,11 @@
 }
 
 @media screen and (max-width: 450px) {
+  .category-dropdown {
+    min-width: 120px;
+  }
 
   .search-container {
     max-width: 380px;
-  }
-
-  .search-button {
-    right: 20px !important;
-  }
-}
-
-
-@media screen and (max-width: 400px) {
-
-  .search-container {
-    max-width: 360px;
-  }
-
-  .search-button {
-    right: 45px !important;
   }
 }
