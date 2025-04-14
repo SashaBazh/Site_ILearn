@@ -85,7 +85,7 @@
 
 .search-button {
   position: absolute;
-  right: 15px;         
+  right: 15px !important;        
   top: 50%;           
   transform: translateY(-50%);
   background: none;
@@ -146,7 +146,7 @@
   }
 
   .search-button {
-    right: 20px; 
+    right: 20px !important;
   }
 }
 
@@ -158,6 +158,6 @@
   }
 
   .search-button {
-    right: 45px; 
+    right: 45px !important;
   }
 }
