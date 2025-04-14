@@ -67,6 +67,7 @@
   flex-grow: 1;
   display: flex;
   align-items: center;
+  position: relative;
   padding: 0 15px;
 }
 
@@ -79,20 +80,26 @@
   font-size: 16px;
   color: #6F7E87;
   font-weight: 600;
+  padding-right: 40px;
 }
+
+.search-button {
+  position: absolute;
+  right: 15px;         
+  top: 50%;           
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
 
 .search-input input::placeholder {
   font-family: 'Effra Trial', sans-serif;
   font-size: 16px;
   color: #6F7E87;
   font-weight: 600;
-}
-
-.search-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0 5px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -133,11 +140,24 @@
 }
 
 @media screen and (max-width: 450px) {
-  .category-dropdown {
-    min-width: 120px;
-  }
 
   .search-container {
     max-width: 380px;
+  }
+
+  .search-button {
+    right: 20px; 
+  }
+}
+
+
+@media screen and (max-width: 400px) {
+
+  .search-container {
+    max-width: 360px;
+  }
+
+  .search-button {
+    right: 45px; 
   }
 }
